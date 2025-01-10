@@ -13,6 +13,7 @@
         field="tags"
         title="工作类别"
         :filters="workOptions"
+        :filter-method="filterTagsMethod"
         :filter-multiple="true"
         :edit-render="{name: 'input'}" width="150"
         >
@@ -22,7 +23,6 @@
             <el-tag
               v-for="tag in row.tags"
               :key="tag"
-              closable
               @close="removeTag(row, tag)">
               {{ tag }}
             </el-tag>
@@ -31,14 +31,7 @@
         <!-- 插槽2 渲染输入框和输入标签按钮 -->
         <template #edit="{ row }">
           <div class="tag-input">
-            <el-tag
-              v-for="tag in row.tags"
-              :key="tag"
-              closable
-              @close="removeTag(row, tag)">
-              {{ tag }}
-            </el-tag>
-            <el-input
+            <!-- <el-input
               v-model="row.inputValue"
               placeholder="请输入标签"
               @keyup.enter="addTag(row)"
@@ -50,11 +43,14 @@
                     </template>
                 </el-button>
               </template>
-            </el-input>
+            </el-input> -->
+            <el-button @click="showOptionManage()" >类别管理
+          </el-button>
           </div>
           </template>
+          
       </vxe-column>
-
+      <vxe-column field="description" title="工作内容" ></vxe-column>
     </vxe-table>
   </div>
 </template>
@@ -75,10 +71,10 @@ export default {
   },
   data() {
     const tableData = [
-      { id: 10001, month: '1月', day: '1日', week: '星期一', type: '开发', tags: ['niu'], inputValue: '' },
+      { id: 10001, month: '1月', day: '1日', week: '星期一', type: '开发', tags: [], inputValue: '' ,description:'啥也没干'},
       { id: 10002, month: '2月', day: '2日', week: '星期二', type: '设计', tags: [], inputValue: '' },
       { id: 10003, month: '3月', day: '3日', week: '星期三', type: '开发', tags: [], inputValue: '' },
-      { id: 10004, month: '4月', day: '4日', week: '星期四', type: '设计', tags: [], inputValue: '' }
+      { id: 10004, month: '4月', day: '4日', week: '星期四', type: '设计', tags: ['开发'], inputValue: '' }
     ];
     const editConfig = {
       trigger: 'click',
@@ -112,7 +108,13 @@ export default {
       if (index !== -1) {
         row.tags.splice(index, 1);
       }
+    },
+    filterTagsMethod({ option, row }) {
+      // 检查输入的值是否存在于数组中
+      console.debug( option, row );
+      return row.tags.includes(option.value);
     }
+
   }
 };
 </script>
