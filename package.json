@@ -1,0 +1,15 @@
+{
+  "dependencies": {
+    "@icon-park/vue-next": "^1.4.2",
+    "@vxe-ui/plugin-render-chart": "4.0.3",
+    "@vxe-ui/plugin-render-element": "^4.0.8",
+    "element-plus": "^2.9.2",
+    "vxe-pc-ui": "^4.3.67",
+    "vxe-table": "^4.10.2"
+  },
+  "devDependencies": {
+    "@vue/babel-helper-vue-jsx-merge-props": "^1.4.0",
+    "@vue/babel-plugin-jsx": "^1.2.5",
+    "sass-embedded": "^1.83.1"
+  }
+}
